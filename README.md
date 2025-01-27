@@ -56,13 +56,13 @@ Ensure you have the following installed:
 Run the development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
 Or with Yarn:
 
 ```bash
-yarn start
+yarn run dev
 ```
 
 The app will be available at `http://localhost:5173` by default.
