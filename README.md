@@ -1,50 +1,125 @@
-# React + TypeScript + Vite
+# Bundler APIs Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application that provides a simple user interface for interacting with Ethereum bundler APIs. It allows users to generate and submit UserOperations compliant with ERC-4337.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Generate UserOperation**: Calls the backend API to create a UserOperation.
+- **Submit Transaction**: Submits the generated UserOperation to the Ethereum entry point.
+- **Responsive Design**: Built with styled-components for a clean and responsive UI.
+- **Proxy Middleware**: Uses an HTTP proxy middleware for backend API requests.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Prerequisites
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Ensure you have the following installed:
+
+- **Node.js**: v18.x or higher
+- **npm** or **yarn**: Latest version
+- A running instance of the backend API (Bundler node).
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/nawar-hisso/bundler-apis-interface.git
+   cd bundler-apis-interface
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+   Or with Yarn:
+
+   ```bash
+   yarn install
+   ```
+
+3. Configure the proxy middleware:
+   The `setupProxy.js` file is already set to forward API requests (`/v1/user-op` and `/v1/rpc`) to `http://localhost:3000`. Update the target URL if your backend runs on a different host or port.
+
+---
+
+## Running the Application
+
+### Start the Frontend
+
+Run the development server:
+
+```bash
+npm start
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Or with Yarn:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+yarn start
 ```
+
+The app will be available at `http://localhost:5173` by default.
+
+### Backend Setup
+
+Ensure your backend API is running at the configured proxy target (default: `http://localhost:3000`).
+
+---
+
+## Usage
+
+1. **Generate UserOperation**:
+
+   - Click the "Generate UserOp" button.
+   - The app will send a request to `/v1/user-op` and display the generated UserOperation.
+
+2. **Submit Transaction**:
+
+   - After generating a UserOperation, click the "Submit Transaction" button.
+   - The app will send the UserOperation to `/v1/rpc` and display the transaction hash.
+
+3. **Error Handling**:
+   - Any errors during API calls will be displayed in the response box.
+
+---
+
+## Project Structure
+
+- **`src/`**:
+  - **`components/ApiButtons.tsx`**: Contains the main logic for interacting with APIs.
+  - **`App.tsx`**: Main application entry point.
+  - **`setupProxy.js`**: Configures the proxy middleware for API requests.
+- **Styled Components**: Used for styling components in a modular and reusable way.
+
+---
+
+## Testing
+
+### Manual Testing
+
+1. Start the backend API and frontend app.
+2. Navigate to `http://localhost:5173`.
+3. Use the buttons to generate and submit UserOperations.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
+
+## Contact
+
+For any questions or feedback:
+
+- **Author**: Nawar Hisso
+- **Email**: [nawwarhisso@gmail.com](mailto:nawwarhisso@gmail.com)
+- **LinkedIn**: [Nawar Hisso](https://www.linkedin.com/in/nawarhisso/)
